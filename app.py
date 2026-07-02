@@ -4,14 +4,11 @@ from gtts import gTTS
 import pyperclip
 import os
 
-# ---------------- Page Config ----------------
 st.set_page_config(
     page_title="Language Translator",
-    page_icon="🌍",
     layout="centered"
 )
 
-# ---------------- Custom CSS ----------------
 st.markdown("""
 <style>
 .main {
@@ -38,7 +35,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- Translator ----------------
 translator = Translator()
 
 languages = {
@@ -60,13 +56,11 @@ languages = {
     "Korean": "ko"
 }
 
-# ---------------- Header ----------------
 st.title(" AI Language Translation Tool")
 st.write("Translate text instantly into multiple languages.")
 
 st.divider()
 
-# ---------------- Input ----------------
 text = st.text_area(
     "Enter Text",
     height=180,
@@ -75,7 +69,6 @@ text = st.text_area(
 
 st.caption(f"Characters: {len(text)}")
 
-# ---------------- Language Selection ----------------
 col1, col2 = st.columns(2)
 
 with col1:
@@ -91,13 +84,11 @@ with col2:
         index=1
     )
 
-# ---------------- Swap Button ----------------
 if st.button(" Swap Languages"):
     source, target = target, source
 
 st.write("")
 
-# ---------------- Translate ----------------
 if st.button(" Translate"):
 
     if text.strip() == "":
@@ -129,19 +120,19 @@ if st.button(" Translate"):
 
             st.write("")
 
-            # Copy Button
+            
             if st.button(" Copy Translation"):
                 pyperclip.copy(result)
                 st.success("Copied to Clipboard!")
 
-            # Text to Speech
+            
             tts = gTTS(result)
             tts.save("translation.mp3")
 
             audio_file = open("translation.mp3", "rb")
             st.audio(audio_file.read())
 
-            # Download Translation
+            
             st.download_button(
                 "⬇ Download Translation",
                 result,
